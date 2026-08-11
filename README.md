@@ -1,88 +1,87 @@
-# Pass & Note Web
+# Pass & Note Recovery Viewer
 
-Pass & Note Web is a browser-based companion to the Pass & Note iOS app. It can create, open, update, import, and export compatible encrypted password and note files without uploading vault contents to an application server.
+Pass & Note Recovery Viewer is a read-only browser companion for the Pass & Note mobile app. It helps users access passwords and secure notes from an encrypted mobile export when their phone is unavailable.
 
-## Features
+The website does not create a vault, modify records, encrypt new files, or save decrypted data.
 
-- Create a temporary browser vault protected by a Master Password.
-- Open existing `.pnvault` backups created by the web or iOS app.
-- Import compatible `.pnpass` password packages and `.pnnote` note packages.
-- Add, edit, reveal, copy, and delete password records.
-- Create, autosave, export, and delete secure notes.
-- Export passwords, notes, or a complete encrypted vault.
-- Automatically activate Privacy Lock when the page enters the background.
-- Delete the temporary vault after a configurable period of inactivity.
+## Supported files
+
+| Extension | Contents |
+| --- | --- |
+| `.pnvault` | Complete encrypted backup containing passwords and notes |
+| `.pnpass` | Encrypted package containing password records |
+| `.pnnote` | Encrypted package containing secure notes |
+
+The files use the Pass & Note version 1 container:
+
+- AES-256-GCM
+- PBKDF2-HMAC-SHA256
+- 600,000 derivation rounds for current mobile exports
+- 32-byte random salt
+- CryptoKit-compatible combined AES-GCM payload layout
+
+## Viewer workflow
+
+1. Select a compatible encrypted export.
+2. Enter the Master Password used when the mobile app created that file.
+3. Read the decrypted passwords or notes.
+4. Reveal or copy a password when necessary.
+5. Close the file to clear all readable values.
+
+No decrypted download, record editing, or web export is available.
+
+## Getting a file from mobile
+
+- Complete vault: **Vault → Export Vault → Confirm Master Password → Save**
+- Passwords: **Passwords → Export → Confirm Master Password → Save**
+- Notes: **Notes → Export → Confirm Master Password → Save**
+
+The mobile app remains the primary place to create, edit, organize, import, and export vault data.
+
+## Privacy and session behavior
+
+- Decryption runs locally through the Web Crypto API.
+- The selected file, Master Password, and decrypted values are not intentionally transmitted to a Pass & Note server.
+- The website does not use `localStorage` or `sessionStorage` for vault data.
+- The Master Password is cleared from its input after each attempt.
+- Sending the page into the background removes readable values from the DOM and activates Privacy Lock.
+- Privacy Lock requires the Master Password again to restore the view.
+- Two minutes of inactivity clears the selected file and all recovery data by default.
+- Viewer Settings can extend the current file session to 5 or 10 minutes.
+- The selected timer exists only in memory and resets to 2 minutes for the next file.
+- Closing the file clears recovery data immediately.
+
+This model cannot protect against a compromised device, malicious browser extension, clipboard monitoring, screenshots, or another person viewing an already-unlocked screen.
 
 ## Run locally
 
-The project has no build step or package dependencies. Serve the directory over HTTP instead of opening `index.html` directly:
+The project has no build step or runtime dependencies. Serve the directory over HTTP:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then open [http://localhost:8000](http://localhost:8000).
+Open [http://localhost:8000](http://localhost:8000).
 
-## Project structure
+## Project files
 
 ```text
 .
-├── index.html    # Application markup and screens
-├── styles.css    # Theme and responsive layouts
-├── app.js        # Vault state, UI, imports, exports, and session behavior
-└── crypto.js     # Pass & Note encryption-format compatibility
+├── index.html    # Recovery landing page and read-only viewer markup
+├── styles.css    # Responsive interface and viewer styles
+├── app.js        # File selection, viewer state, privacy lock, and rendering
+└── crypto.js     # Pass & Note container validation and decryption
 ```
-
-## Compatible file formats
-
-| Extension | Contents |
-| --- | --- |
-| `.pnvault` | Complete encrypted vault with passwords and notes |
-| `.pnpass` | One or more encrypted password records |
-| `.pnnote` | One or more encrypted secure notes |
-| `.txt` | One readable, unencrypted note export |
-
-Encrypted files use the same version 1 container as the iOS app:
-
-- AES-256-GCM
-- PBKDF2-HMAC-SHA256
-- 600,000 derivation rounds
-- 32-byte random salt
-- CryptoKit-compatible combined AES-GCM payload layout
-
-## Security behavior
-
-- Cryptographic operations run locally through the browser Web Crypto API.
-- The raw Master Password is not stored.
-- Working vault data is encrypted in `sessionStorage`, not persistent application storage.
-- Switching tabs, minimizing, or backgrounding the page removes decrypted state from memory and requires the Master Password again.
-- Inactivity expiry deletes the encrypted working session. The available limits are 2, 5, 10, 15, and 30 minutes.
-- Users must export a new `.pnvault` before the session ends to retain their changes.
-- Pass & Note cannot recover a forgotten Master Password.
-
-This application reduces exposure but cannot protect against a compromised device, malicious browser extensions, clipboard monitoring, screenshots, or someone using an already-unlocked browser.
 
 ## Deployment
 
-Deploy the four application files to any static web host. Production hosting must use HTTPS because Web Crypto and related browser security features require a secure context.
+Deploy the four application files to a static web host. Production must use HTTPS. The page includes a restrictive Content Security Policy and makes no application network connections.
 
-Do not add analytics, remote logging, or form-submission services without updating the privacy disclosures and carefully ensuring that vault contents and Master Passwords can never be transmitted.
+Before release:
 
-## Browser support
-
-Use a current version of Safari, Chrome, Edge, or Firefox with support for:
-
-- Web Crypto API
-- File and Blob APIs
-- `sessionStorage`
-- ES2020 JavaScript
-
-## Release checklist
-
-- Test import and export against real iOS-generated files.
-- Test incorrect-password and corrupted-file behavior.
-- Verify Privacy Lock and every inactivity setting.
-- Test desktop, tablet, and mobile layouts.
-- Complete publisher, support, privacy, and legal information before public release.
-- Serve the production version exclusively over HTTPS.
-
+- Test all three formats against real files exported by the mobile app.
+- Test incorrect passwords, corrupted files, and mismatched file extensions.
+- Verify background Privacy Lock in supported desktop and mobile browsers.
+- Verify the 2, 5, and 10-minute inactivity options and default reset.
+- Confirm that the production host does not inject analytics or third-party scripts.
+- Complete publisher, support, privacy, and legal information.
