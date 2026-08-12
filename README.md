@@ -4,6 +4,8 @@ Pass & Note Recovery Viewer is a read-only browser companion for the Pass & Note
 
 The website does not create a vault, modify records, encrypt new files, or save decrypted data.
 
+The homepage also includes a local password generator with 16, 32, and 64-character options. It uses the browser's cryptographically secure random generator, defaults to 32 characters, and does not store generated passwords.
+
 ## Supported files
 
 | Extension | Contents |
@@ -68,8 +70,10 @@ Open [http://localhost:8000](http://localhost:8000).
 ```text
 .
 ├── index.html    # Recovery landing page and read-only viewer markup
+├── privacy/      # Public Privacy Policy route
+├── terms/        # Public Terms & Conditions route
 ├── styles.css    # Responsive interface and viewer styles
-├── app.js        # File selection, viewer state, privacy lock, and rendering
+├── app.js        # Password generator, file selection, viewer state, and rendering
 └── crypto.js     # Pass & Note container validation and decryption
 ```
 
@@ -83,5 +87,6 @@ Before release:
 - Test incorrect passwords, corrupted files, and mismatched file extensions.
 - Verify background Privacy Lock in supported desktop and mobile browsers.
 - Verify the 2, 5, and 10-minute inactivity options and default reset.
+- Verify 16, 32, and 64-character password generation and clipboard copying.
 - Confirm that the production host does not inject analytics or third-party scripts.
 - Complete publisher, support, privacy, and legal information.
