@@ -69,6 +69,7 @@ Open [http://localhost:8000](http://localhost:8000).
 
 ```text
 .
+├── assets/       # App icon used for browser tabs and mobile downloads
 ├── index.html    # Recovery landing page and read-only viewer markup
 ├── privacy/      # Public Privacy Policy route
 ├── terms/        # Public Terms & Conditions route
@@ -79,7 +80,7 @@ Open [http://localhost:8000](http://localhost:8000).
 
 ## Deployment
 
-Deploy the four application files to a static web host. Production must use HTTPS. The page includes a restrictive Content Security Policy and makes no application network connections.
+Deploy the application files, assets directory, and privacy and terms directories to a static web host. Production must use HTTPS. The page includes a restrictive Content Security Policy and makes no application network connections.
 
 Before release:
 
@@ -90,3 +91,7 @@ Before release:
 - Verify 16, 32, and 64-character password generation and clipboard copying.
 - Confirm that the production host does not inject analytics or third-party scripts.
 - Complete publisher, support, privacy, and legal information.
+
+## App download links
+
+The homepage has a **Get the app** section linking to the App Store and Google Play. To update either URL, edit the corresponding `href` in the `download` section of `index.html`. The shared website icon is `assets/app-icon.png`.

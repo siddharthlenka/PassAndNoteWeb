@@ -1669,3 +1669,228 @@ footer {
     flex-basis: 40px;
   }
 }
+
+/* Mobile app downloads */
+.download-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px 48px;
+  padding: clamp(28px, 5vw, 64px);
+  background: radial-gradient(ellipse at 0 50%, #087bd644, transparent 60%),
+    linear-gradient(120deg, #10263b, #101b2b 65%, #131d33);
+  border: 1px solid #62b5ff45;
+  border-radius: 32px;
+  box-shadow: 0 24px 70px #0004, inset 0 1px 0 #ffffff12;
+}
+.download-art {
+  position: relative;
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.download-orbit {
+  position: absolute;
+  z-index: -1;
+  width: 240px;
+  height: 240px;
+  border: 1px solid #56b7ff25;
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px #4aaaff06, 0 0 0 48px #4aaaff04;
+}
+.download-icon {
+  width: 144px;
+  height: 144px;
+  border-radius: 32px;
+  border: 1px solid #8acfff40;
+  box-shadow: 0 18px 44px #0006, 0 0 45px #259bff25;
+  transform: rotate(-6deg);
+}
+.download-app-name {
+  color: #dcefff;
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: .025em;
+}
+.download-copy .eyebrow {
+  color: #83c8ff;
+}
+.download-copy h2 {
+  max-width: 580px;
+  margin: 0;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -.035em;
+}
+.download-copy > p:last-child {
+  max-width: 500px;
+  margin: 16px 0 0;
+  color: #b7c9dc;
+  line-height: 1.7;
+}
+.download-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.store-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 78px;
+  padding: 13px 18px;
+  color: #fff;
+  background: linear-gradient(160deg, #172637, #080e17);
+  border: 1px solid #ffffff45;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px #0003, inset 0 1px 0 #ffffff0c;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.store-logo {
+  width: 31px;
+  height: 36px;
+  flex: 0 0 31px;
+}
+.store-label {
+  display: flex;
+  flex-direction: column;
+}
+.store-label > span {
+  color: #c3cedb;
+  font-size: 11px;
+  letter-spacing: .025em;
+}
+.store-label strong {
+  font-size: 23px;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  white-space: nowrap;
+}
+.store-arrow {
+  margin-left: auto;
+  padding-left: 7px;
+  color: #91a8bd;
+  font-size: 19px;
+}
+.store-link:hover {
+  transform: translateY(-3px);
+  border-color: #83c8ff;
+  box-shadow: 0 12px 28px #0005, 0 0 24px #2e9cff18;
+}
+.store-link:focus-visible {
+  outline: 3px solid #83c8ff;
+  outline-offset: 4px;
+}
+@media (max-width: 900px) {
+  .download-card {
+    grid-template-columns: 160px minmax(0, 1fr);
+    column-gap: 28px;
+  }
+}
+@media (max-width: 650px) {
+  .download-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    text-align: center;
+    border-radius: 24px;
+  }
+  .download-art {
+    grid-row: auto;
+    padding-top: 12px;
+  }
+  .download-icon {
+    width: 112px;
+    height: 112px;
+    border-radius: 25px;
+  }
+  .download-orbit {
+    width: 185px;
+    height: 185px;
+  }
+  .download-copy > p:last-child {
+    margin-inline: auto;
+  }
+  .download-links {
+    justify-content: center;
+    text-align: left;
+  }
+  .store-link {
+    flex: 1 1 210px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .store-link {
+    transition: none;
+  }
+  .store-link:hover {
+    transform: none;
+  }
+}
+
+/* Store shortcuts stay in the sticky header, including on small screens. */
+.header-downloads {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 8px;
+}
+.header-downloads .local-status {
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.header-store-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  color: #fff;
+  background: linear-gradient(145deg, #1c3046, #0b1420);
+  border: 1px solid #83c8ff45;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 #ffffff0c;
+}
+.header-store-link .store-logo {
+  width: 22px;
+  height: 25px;
+  flex-basis: 22px;
+}
+.header-store-link:hover {
+  background: #203b57;
+  border-color: #83c8ff;
+}
+.header-store-link:focus-visible {
+  outline: 3px solid #83c8ff;
+  outline-offset: 3px;
+}
+@media (max-width: 1200px) {
+  .header-downloads .local-status {
+    display: none;
+  }
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  #landingView .site-header {
+    grid-template-columns: auto 1fr auto;
+    gap: 12px;
+  }
+  #landingView .site-header nav {
+    justify-content: center;
+    gap: 0;
+  }
+  #landingView .site-header nav a {
+    padding-inline: 7px;
+  }
+}
+@media (max-width: 900px) {
+  .header-downloads {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
