@@ -71,6 +71,7 @@ Open [http://localhost:8000](http://localhost:8000).
 .
 ├── assets/       # App icon used for browser tabs and mobile downloads
 ├── index.html    # Recovery landing page and read-only viewer markup
+├── security/     # Mobile security architecture, threat model, and specifications
 ├── privacy/      # Public Privacy Policy route
 ├── terms/        # Public Terms & Conditions route
 ├── styles.css    # Responsive interface and viewer styles
@@ -80,7 +81,7 @@ Open [http://localhost:8000](http://localhost:8000).
 
 ## Deployment
 
-Deploy the application files, assets directory, and privacy and terms directories to a static web host. Production must use HTTPS. The page includes a restrictive Content Security Policy and makes no application network connections.
+Deploy the application files, assets directory, and security, privacy, and terms directories to a static web host. Production must use HTTPS. The page includes a restrictive Content Security Policy and makes no application network connections.
 
 Before release:
 
@@ -95,3 +96,11 @@ Before release:
 ## App download links
 
 The homepage has a **Get the app** section linking to the App Store and Google Play. To update either URL, edit the corresponding `href` in the `download` section of `index.html`. The shared website icon is `assets/app-icon.png`.
+
+## Security architecture content
+
+`security/index.html` explains the mobile vault key hierarchy, platform-specific storage and biometric behavior, locking, encrypted exports, browser recovery, threat model, architectural comparison, technical specifications, and FAQ. The homepage links to it and summarizes the mobile protections before the recovery viewer.
+
+The September 2026 content was checked against the local iOS and Android implementations: vault key/envelope services, database opening and password change flows, backup encryption, biometric services, lifecycle and clipboard controls, and dependency declarations. iOS declares SQLCipher 4.10.0 and GRDB.swift 6.24.1; Android declares SQLCipher 4.17.0. SQLCipher defaults are identified as defaults and linked to the upstream documentation. This describes the inspected source, not a verification of published store binaries or an independent audit.
+
+When changing security copy, check the matching implementation and dependency versions. Keep mobile vault encryption separate from export encryption, privacy shielding separate from database locking, and mobile clipboard expiration separate from the browser viewer’s clipboard behavior.

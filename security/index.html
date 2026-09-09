@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#06090f" />
+    <meta name="description" content="How Pass &amp; Note protects your mobile vault: layered encryption, key management, biometric unlock, encrypted backups, and local browser recovery." />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+    <link rel="canonical" href="https://passandnote.com/security/" />
+    <title>Security Architecture | Pass &amp; Note</title>
+    <link rel="icon" type="image/png" sizes="1024x1024" href="../assets/app-icon.png" />
+    <link rel="apple-touch-icon" href="../assets/app-icon.png" />
+    <link rel="stylesheet" href="../styles.css?v=20260909-4" />
+  </head>
+  <body class="security-page">
+    <a class="skip-link" href="#architecture">Skip to security architecture</a>
+      <header class="site-header security-site-header">
+        <a class="brand" href="/#top" aria-label="Pass and Note home"
+          ><img class="brand-icon" src="../assets/app-icon.png" alt="" width="38" height="38" /> <span>Pass & Note</span></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="/#password-generator">Generator</a>
+          <a href="/#supported">Files</a>
+          <a href="/#mobile-guide">Mobile Guide</a>
+          <a href="/#download">Get the app</a>
+          <a class="active" href="/security/" aria-current="page">Security</a> <a href="/#about">About</a>
+        </nav>
+        <div class="header-downloads" role="group" aria-label="Download the mobile app">
+          <span class="local-status"><i></i> Local-first vault</span>
+            <a class="header-store-link" href="https://apps.apple.com/app/id6801015333" target="_blank" rel="noopener noreferrer" aria-label="Download on the App Store (opens in a new tab)" title="Download on the App Store">
+              <svg class="store-logo apple-logo" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d="M17.05 12.54c.03 3.15 2.76 4.2 2.79 4.21-.02.07-.44 1.5-1.44 2.98-.87 1.28-1.78 2.55-3.2 2.58-1.4.03-1.85-.83-3.45-.83-1.6 0-2.1.8-3.42.86-1.37.05-2.41-1.38-3.29-2.65-1.79-2.59-3.16-7.33-1.32-10.53a5.1 5.1 0 0 1 4.32-2.63c1.35-.02 2.62.91 3.45.91.83 0 2.39-1.13 4.03-.96.69.03 2.62.28 3.86 2.09-.1.06-2.3 1.34-2.33 3.97ZM14.42 4.74c.73-.88 1.23-2.11 1.1-3.34-1.06.04-2.35.71-3.11 1.59-.68.78-1.28 2.02-1.12 3.21 1.18.09 2.39-.6 3.13-1.46Z" />
+                </svg>
+            </a>
+            <a class="header-store-link" href="https://play.google.com/store/apps/details?id=com.passandnote.vault" target="_blank" rel="noopener noreferrer" aria-label="Get it on Google Play (opens in a new tab)" title="Get it on Google Play">
+              <svg class="store-logo" viewBox="0 0 32 36" aria-hidden="true">
+                  <path fill="#4285f4" d="M1 1 18 18 1 35Z" />
+                  <path fill="#34a853" d="m1 1 21 12-4 5Z" />
+                  <path fill="#fbbc04" d="m22 13 8 4.5c.7.4.7 1.1 0 1.5L22 23l-4-5Z" />
+                  <path fill="#ea4335" d="m1 35 17-17 4 5Z" />
+                </svg>
+            </a>
+        </div>
+      </header>
+    <main id="top" class="security-main page-width">
+      <header class="security-hero">
+        <p class="eyebrow">PASS &amp; NOTE SECURITY</p>
+        <h1>Security by design.<br><span>Your vault stays with you.</span></h1>
+        <p>Pass &amp; Note uses a local-first architecture. Your mobile vault is encrypted on your device, your Master Password is not stored by the app, and recovery happens locally in your browser.</p>
+        <div class="architecture-meta"><span>Security Architecture v1.0</span><span>Updated <time datetime="2026-09-09">September 2026</time></span></div>
+      </header>
+
+      <section id="architecture" class="security-block" aria-labelledby="architecture-title">
+        <div class="section-heading"><p class="eyebrow">THE KEY HIERARCHY</p><h2 id="architecture-title">Two cryptographic layers. One protected vault.</h2><p>Your Master Password protects a separate vault key. That vault key unlocks the encrypted database.</p></div>
+        <figure class="architecture-figure">
+          <div class="architecture-grid">
+            <div class="architecture-lane">
+              <h3><span>01</span> Protect the vault key</h3>
+              <ol class="key-flow">
+                <li><strong>Master Password</strong><small>Processed locally; not saved by the app</small></li>
+                <li><strong>PBKDF2-HMAC-SHA256</strong><small>600,000 iterations · unique 32-byte salt</small></li>
+                <li><strong>256-bit key-encryption key</strong><small>AES-256-GCM wraps the random vault key</small></li>
+                <li class="flow-result"><strong>Encrypted vault-key envelope</strong><small>iOS Keychain / Android Keystore-backed storage</small></li>
+              </ol>
+            </div>
+            <div class="architecture-lane">
+              <h3><span>02</span> Protect the database</h3>
+              <ol class="key-flow">
+                <li><strong>Random 256-bit vault key</strong><small>Generated when a new vault is created</small></li>
+                <li><strong>SQLCipher key derivation</strong><small>PBKDF2-HMAC-SHA512 · 256,000 iterations</small></li>
+                <li><strong>Database key material</strong><small>AES-256-CBC + HMAC-SHA512</small></li>
+                <li class="flow-result"><strong>Encrypted local vault</strong><small>Your passwords and secure notes</small></li>
+              </ol>
+            </div>
+          </div>
+          <figcaption>The same vault key protected in layer 1 is supplied to SQLCipher in layer 2 after unlocking. The password-derived key and the database key material have different jobs.</figcaption>
+        </figure>
+        <div class="security-card-grid">
+          <article class="architecture-card"><h3>Layer 1: protecting the vault key</h3><p>PBKDF2 processes your Master Password with a unique salt to derive a 256-bit key-encryption key. AES-GCM uses that key to encrypt and authenticate the vault key. This encrypted package is called a key envelope.</p></article>
+          <article class="architecture-card"><h3>Layer 2: protecting the database</h3><p>The unlocked vault key is supplied as SQLCipher’s passphrase input. SQLCipher derives its own key material, encrypts database pages, and checks their authentication codes when reading them.</p></article>
+        </div>
+        <p class="security-callout">Your Master Password does not directly become the database encryption key.</p>
+      </section>
+
+      <nav class="security-contents" aria-label="On this security page">
+        <a href="#keys">Key management</a><a href="#biometrics">Biometrics</a><a href="#locking">Locking &amp; privacy</a><a href="#backups">Backups</a><a href="#recovery-viewer">Recovery Viewer</a><a href="#threat-model">Threat model</a><a href="#comparison">Local-first design</a><a href="#specifications">Specifications</a><a href="#faq">FAQ</a>
+      </nav>
+
+      <section id="keys" class="security-block" aria-labelledby="keys-title">
+        <div class="section-heading"><p class="eyebrow">KEY MANAGEMENT</p><h2 id="keys-title">Your password protects the key to your vault.</h2><p>Every newly created vault receives 32 bytes of cryptographically secure randomness for its vault key. Keeping this key separate from your password lets you change your Master Password without rewriting the encrypted database.</p></div>
+        <div class="architecture-card">
+          <h3>Changing your Master Password</h3>
+          <ol class="security-steps"><li><strong>Unlock the existing key</strong><span>Your current Master Password opens the stored key envelope.</span></li><li><strong>Derive a new wrapping key</strong><span>Your new Master Password and a fresh salt produce a new key-encryption key.</span></li><li><strong>Protect the same vault key again</strong><span>The app saves a new AES-GCM envelope. The database continues using its existing vault key.</span></li></ol>
+          <p class="security-caption">A password change does not update previously exported files or revoke copies of an old key envelope. Keep your older backups and passwords safe.</p>
+        </div>
+        <p class="security-caption">The random-key design describes newly created vaults. Older iOS vaults may retain their existing derived key when migrated to the current envelope format.</p>
+      </section>
+
+      <section id="biometrics" class="security-block" aria-labelledby="biometrics-title">
+        <div class="section-heading"><p class="eyebrow">BIOMETRICS &amp; PLATFORM SECURITY</p><h2 id="biometrics-title">A quick unlock for the same encrypted vault.</h2><p>Biometric authentication authorizes access to the vault key through your device’s security services. It does not turn your face or fingerprint into the database encryption key. Keep your Master Password for exports and when biometric access is unavailable.</p></div>
+        <div class="security-card-grid">
+          <article class="architecture-card"><p class="eyebrow">iOS</p><h3>Keychain protection</h3><p>The password-protected key envelope is stored in the Keychain with <code>kSecAttrAccessibleWhenUnlockedThisDeviceOnly</code>.</p><p>When biometric unlock is enabled, a separate vault-key item uses <code>kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly</code> and <code>.biometryCurrentSet</code>. Removing the device passcode or changing enrolled biometrics invalidates that biometric access; the Master Password is needed again.</p><p>CryptoKit handles AES-GCM. CommonCrypto handles password derivation and provides the Apple SQLCipher cryptography implementation.</p></article>
+          <article class="architecture-card"><p class="eyebrow">ANDROID</p><h3>Keystore-backed protection</h3><p>The password-protected envelope is additionally encrypted using an AES-GCM key in Android Keystore before being saved in app-private storage.</p><p>Biometric quick unlock uses a separate Keystore wrapping key requiring strong biometric authentication for each use. The key is configured to become invalid when biometric enrollment changes.</p><p>The app uses <code>FLAG_SECURE</code> to restrict screenshots and non-secure displays, and sets <code>allowBackup="false"</code> to disable Android’s standard app backup. Device behavior can vary; create explicit encrypted exports for recovery.</p></article>
+        </div>
+      </section>
+
+      <section id="locking" class="security-block" aria-labelledby="locking-title">
+        <div class="section-heading"><p class="eyebrow">VAULT LOCKING &amp; PRIVACY</p><h2 id="locking-title">Reduce exposure when you step away.</h2></div>
+        <div class="security-card-grid">
+          <article class="architecture-card"><h3>Explicit vault locking</h3><p>Locking closes the database session and returns the app to its locked screen. Authentication is required to open the vault again.</p><h3>Background privacy</h3><p>A privacy shield covers sensitive views when the app becomes inactive. Returning from the background requires authentication once your selected auto-lock interval has elapsed. Hiding the screen and closing the database are distinct controls.</p></article>
+          <article class="architecture-card"><h3>Editor autosave</h3><p>Note editors save changes around app lifecycle transitions. On iOS, the app asks sensitive editors to autosave before displaying the privacy shield.</p><h3>Clipboard controls</h3><p>Mobile settings let you choose when copied passwords expire or clear on backgrounding. iOS also marks copied passwords as local-only. Expiration reduces the time a value is available; it cannot undo a copy already captured by another app.</p></article>
+        </div>
+      </section>
+
+      <section id="backups" class="security-block" aria-labelledby="backups-title">
+        <div class="section-heading"><p class="eyebrow">ENCRYPTED BACKUPS</p><h2 id="backups-title">A separate encrypted container, under your control.</h2><p>Exports contain selected records or a full collection of passwords and notes. They are independently encrypted before being handed to your chosen storage location.</p></div>
+        <ol class="security-steps backup-flow"><li><strong>Confirm your Master Password</strong><span>The mobile app verifies access to the vault.</span></li><li><strong>Generate a fresh export salt</strong><span>A new 32-byte salt is used for each export.</span></li><li><strong>Derive the export key</strong><span>PBKDF2-HMAC-SHA256 · 600,000 iterations · 256-bit key.</span></li><li><strong>Encrypt with AES-GCM</strong><span>The record payload receives authenticated encryption.</span></li><li><strong>Choose where to save</strong><span>Save a .pnpass, .pnnote, or .pnvault file using your device’s file picker.</span></li></ol>
+        <div class="security-callout">Pass &amp; Note does not need your backup uploaded to a server to decrypt it. The Recovery Viewer opens it locally in your browser.</div>
+        <p class="security-caption">The encrypted payload protects record contents. Container metadata—including format, creation date, content type, and item count—is readable. Older backups require the Master Password used when they were created, even after a password change.</p>
+        <a class="text-link" href="/#mobile-guide">See the mobile export guide →</a>
+      </section>
+
+      <section id="recovery-viewer" class="security-block" aria-labelledby="recovery-title">
+        <div class="section-heading"><p class="eyebrow">BROWSER RECOVERY</p><h2 id="recovery-title">Read your backup when your phone is unavailable.</h2><p>The Recovery Viewer does not create a vault, modify records, or upload your file. Your file and password remain inside this browser tab.</p></div>
+        <div class="security-card-grid">
+          <article class="architecture-card"><h3>Local, read-only access</h3><p>The Web Crypto API derives the export key and decrypts compatible backups in memory. The viewer displays passwords and notes, supports reveal and copy, and does not save a browser vault.</p><a class="text-link" href="/#recovery">Open the Recovery Viewer →</a></article>
+          <article class="architecture-card"><h3>Short-lived sessions</h3><p>The viewer hides readable values and activates Privacy Lock when the tab goes into the background. Two minutes of inactivity clears the selected file by default; you may temporarily choose five or ten minutes. Close File clears the current recovery session.</p><p>Browser clipboard contents do not automatically expire. Clear copied passwords when you finish.</p></article>
+        </div>
+        <p class="security-caption">Hosting the website can expose ordinary connection metadata to the web host. That is separate from local vault processing. <a href="/privacy/">Read the Privacy Policy →</a></p>
+      </section>
+
+      <section id="threat-model" class="security-block" aria-labelledby="threat-title">
+        <div class="section-heading"><p class="eyebrow">THREAT MODEL</p><h2 id="threat-title">What these protections can—and cannot—do.</h2><p>Encryption protects data at rest. Its effectiveness also depends on a strong Master Password, device security, and how you handle unlocked data.</p></div>
+        <div class="security-card-grid">
+          <article class="architecture-card threat-positive"><h3>Designed to reduce these risks</h3><ul><li><strong>Reading a stolen encrypted vault:</strong> the database needs its key to open.</li><li><strong>Reading a stolen encrypted backup:</strong> records require the export password; password guessing remains possible.</li><li><strong>Undetected changes to encrypted data:</strong> authentication checks detect changes to protected database pages and export payloads.</li><li><strong>Exposure through a provider vault database:</strong> Pass &amp; Note does not operate a server-side vault store.</li><li><strong>Interception during recovery upload:</strong> the viewer needs no backup upload or remote decryption request.</li></ul></article>
+          <article class="architecture-card threat-negative"><h3>Outside the protection boundary</h3><ul><li>Malware, keyloggers, or a compromised operating system.</li><li>Someone who knows your Master Password or has obtained the vault key.</li><li>Someone with access to an unlocked vault or recovery session.</li><li>Malicious browser extensions or a tampered website.</li><li>Screenshots, external cameras, or clipboard monitoring.</li><li>Lost files, forgotten passwords, or destroyed devices without a usable backup.</li></ul></article>
+        </div>
+      </section>
+
+      <section id="comparison" class="security-block" aria-labelledby="comparison-title">
+        <div class="section-heading"><p class="eyebrow">ARCHITECTURE, NOT A SECURITY RANKING</p><h2 id="comparison-title">Cloud-synced and local-first vaults.</h2><p>Different storage models make different tradeoffs. Many cloud-synced products also encrypt locally and never send the Master Password to their provider.</p></div>
+        <div class="security-table-wrap" role="region" aria-label="Vault architecture comparison" tabindex="0"><table class="security-table"><caption>How the storage and recovery models differ</caption><thead><tr><th scope="col">Design choice</th><th scope="col">Cloud-synced vaults</th><th scope="col">Pass &amp; Note</th></tr></thead><tbody>
+          <tr><th scope="row">Primary storage model</th><td>Local and provider-hosted encrypted copies, depending on product</td><td>Local encrypted database on the user’s device</td></tr>
+          <tr><th scope="row">Provider account</th><td>Often required for sync</td><td>No vault account required</td></tr>
+          <tr><th scope="row">Provider stores the vault</th><td>Typically stores an encrypted copy</td><td>No Pass &amp; Note server-side vault copy</td></tr>
+          <tr><th scope="row">Master Password handling</th><td>Many derive keys locally; implementation varies</td><td>Processed locally; not sent to a vault service</td></tr>
+          <tr><th scope="row">Local database protection</th><td>Varies by product</td><td>SQLCipher · AES-256-CBC + HMAC-SHA512</td></tr>
+          <tr><th scope="row">Separate vault key</th><td>Available in many designs</td><td>Random key protected by a password-derived wrapping key</td></tr>
+          <tr><th scope="row">Backup and sync</th><td>Often automatic sync; offline export varies</td><td>User-managed encrypted exports</td></tr>
+          <tr><th scope="row">Browser recovery</th><td>Varies by product</td><td>Read-only, local processing of a compatible backup</td></tr>
+          <tr><th scope="row">Forgotten Master Password</th><td>Recovery options vary; account reset may not recover data</td><td>No server-side password reset or decryption recovery</td></tr>
+        </tbody></table></div>
+        <p class="security-caption">This comparison describes architectural differences, not a security ranking. Security depends on implementation, threat model, device security, and how each product is used.</p>
+        <div class="architecture-card knowledge-card"><h3>What Pass &amp; Note does not need to know</h3><p>Your Master Password is processed on your device. Pass &amp; Note does not maintain a server-side copy of your vault or require an encrypted backup upload for recovery.</p><p>You decide where exported backups are stored. If you choose a cloud storage provider, that provider’s handling of the saved file is separate from Pass &amp; Note’s local processing.</p></div>
+      </section>
+
+      <section id="specifications" class="security-block" aria-labelledby="specs-title">
+        <div class="section-heading"><p class="eyebrow">TECHNICAL REFERENCE</p><h2 id="specs-title">The details behind the design.</h2><p>Architecture v1.0 · September 2026. Dependency versions below describe the documented mobile implementations; installed app versions may differ.</p></div>
+        <div class="security-table-wrap" role="region" aria-label="Cryptographic specifications" tabindex="0"><table class="security-table"><caption>Vault and export cryptography</caption><thead><tr><th scope="col">Specification</th><th scope="col">Implementation</th></tr></thead><tbody>
+          <tr><th scope="row">SQLCipher dependency</th><td>iOS: 4.10.0 · Android: 4.17.0</td></tr>
+          <tr><th scope="row">Database cipher</th><td>AES-256-CBC</td></tr>
+          <tr><th scope="row">Database page authentication</th><td>HMAC-SHA512</td></tr>
+          <tr><th scope="row">SQLCipher KDF</th><td>PBKDF2-HMAC-SHA512 · 256,000 iterations (default)</td></tr>
+          <tr><th scope="row">SQLCipher page size / salt</th><td>4,096-byte pages · 16-byte salt (defaults)</td></tr>
+          <tr><th scope="row">Master Password KDF</th><td>PBKDF2-HMAC-SHA256 · 600,000 iterations</td></tr>
+          <tr><th scope="row">Master Password salt / derived key</th><td>32-byte random salt · 256-bit key-encryption key</td></tr>
+          <tr><th scope="row">New vault key</th><td>256-bit cryptographically secure random key</td></tr>
+          <tr><th scope="row">Vault-key wrapping</th><td>AES-256-GCM</td></tr>
+          <tr><th scope="row">Export encryption / format</th><td>AES-256-GCM · PASSNOTE container v1</td></tr>
+          <tr><th scope="row">Export KDF / salt</th><td>PBKDF2-HMAC-SHA256 · 600,000 iterations · fresh 32-byte salt</td></tr>
+          <tr><th scope="row">Export sealed payload</th><td>12-byte nonce + ciphertext + 16-byte authentication tag</td></tr>
+          <tr><th scope="row">Apple crypto APIs</th><td>CryptoKit (AES-GCM); CommonCrypto (PBKDF2 and SQLCipher provider)</td></tr>
+          <tr><th scope="row">Database integration</th><td>iOS: GRDB.swift 6.24.1 + SQLCipher · Android: SQLCipher Android API</td></tr>
+          <tr><th scope="row">Browser recovery</th><td>Web Crypto API · in-memory decryption · read-only records</td></tr>
+        </tbody></table></div>
+        <p class="security-caption">SQLCipher’s database defaults and page authentication are described in <a href="https://www.zetetic.net/sqlcipher/design/" target="_blank" rel="noopener noreferrer">Zetetic’s security design</a> and <a href="https://www.zetetic.net/sqlcipher/sqlcipher-api/" target="_blank" rel="noopener noreferrer">SQLCipher’s API reference</a>.</p>
+      </section>
+
+      <section id="faq" class="security-block" aria-labelledby="faq-title">
+        <div class="section-heading"><p class="eyebrow">SECURITY FAQ</p><h2 id="faq-title">A few practical questions.</h2></div>
+        <div class="security-faq">
+          <details><summary>Can you recover my Master Password?</summary><p>No. Pass &amp; Note has no server-side password reset that can decrypt your vault. A backup requires the Master Password used when it was created. Keep your password and encrypted recovery files somewhere safe.</p></details>
+          <details><summary>Does changing my password update old backups?</summary><p>No. Changing the mobile Master Password re-wraps the current vault key. Every existing export remains protected by its original export password.</p></details>
+          <details><summary>What happens if I change my enrolled biometrics?</summary><p>The biometric access is configured to become invalid. Use your Master Password to unlock the vault and set up biometric quick unlock again.</p></details>
+          <details><summary>Can I use the website as my everyday vault?</summary><p>The website is a read-only recovery viewer. Create, edit, organize, import, and export records in the mobile app. The viewer processes a compatible export locally without saving a browser vault.</p></details>
+          <details><summary>Does a full vault export contain everything needed to unlock it?</summary><p>It contains encrypted passwords and notes plus the public metadata needed for decryption. It does not include your Master Password. You must enter the password used for that export.</p></details>
+          <details><summary>Is an architecture description a security audit?</summary><p>No. This page explains the implementation and its intended protection boundaries. It is not a claim of independent audit or certification.</p></details>
+        </div>
+        <div class="security-bottom-links"><a class="primary-button" href="/#download">Get Pass &amp; Note</a><a class="text-link" href="/#recovery">Open an encrypted backup →</a></div>
+      </section>
+    </main>
+    <footer><div class="page-width footer-content"><span>Pass &amp; Note · Security Architecture</span><nav class="footer-links" aria-label="Footer"><a href="/#recovery">Recovery Viewer</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms &amp; Conditions</a></nav></div></footer>
+  </body>
+</html>
