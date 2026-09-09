@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)"/>
+  <meta content="Get help setting up Pass and Note, managing your vault, saving encrypted backups, restoring files, and troubleshooting." name="description"/>
+  <meta content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" http-equiv="Content-Security-Policy"/>
+  <title>
+   Help &amp; Guides | Pass &amp; Note
+  </title>
+  <link href="https://passandnote.com/help/" rel="canonical"/>
+  <link href="/assets/app-icon.png" rel="icon" sizes="1024x1024" type="image/png"/>
+  <link href="/assets/app-icon.png" rel="apple-touch-icon"/>
+  <link href="/styles.css?v=20260909-6" rel="stylesheet"/>
+  <script defer="" src="/site.js?v=20260909-5">
+  </script>
+ </head>
+ <body>
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header">
+   <div class="header-inner page-width">
+    <a aria-label="Pass and Note home" class="brand" href="/">
+     <img alt="" height="36" src="/assets/app-icon.png" width="36"/>
+     <span>
+      Pass &amp; Note
+     </span>
+    </a>
+    <button aria-controls="main-navigation" aria-expanded="false" class="menu-toggle" type="button">
+     <svg aria-hidden="true" viewbox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16">
+      </path>
+     </svg>
+     <span>
+      Menu
+     </span>
+    </button>
+    <nav aria-label="Main navigation" id="main-navigation">
+     <a href="/features/">
+      Features
+     </a>
+     <a href="/how-it-works/">
+      How It Works
+     </a>
+     <a href="/security/">
+      Security
+     </a>
+     <a href="/recovery/">
+      Recovery
+     </a>
+     <a aria-current="page" href="/help/">
+      Help
+     </a>
+     <a class="nav-download" href="/#download">
+      Download
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </nav>
+   </div>
+  </header>
+  <main id="main">
+   <header class="page-hero page-width">
+    <p class="eyebrow">
+     HELP &amp; GUIDES
+    </p>
+    <h1>
+     A little guidance goes a long way.
+    </h1>
+    <p class="lead">
+     Set up your vault, keep a backup, and find your way back when you need help.
+    </p>
+   </header>
+   <nav aria-label="Help topics" class="section-nav page-width">
+    <a href="#getting-started">
+     Getting Started
+    </a>
+    <a href="#vault-management">
+     Vault Management
+    </a>
+    <a href="#backups">
+     Backups
+    </a>
+    <a href="#troubleshooting">
+     Troubleshooting
+    </a>
+   </nav>
+   <section class="section page-width guide-section" id="getting-started">
+    <div class="section-heading">
+     <p class="eyebrow">
+      01 · GETTING STARTED
+     </p>
+     <h2>
+      Make the vault your own.
+     </h2>
+    </div>
+    <div class="faq-list">
+     <details id="create-vault">
+      <summary>
+       Create your vault
+      </summary>
+      <p>
+       Open Pass &amp; Note on your phone and follow the setup flow to create and confirm a strong Master Password. Keep it somewhere safe: there is no server-side reset that can decrypt your vault.
+      </p>
+     </details>
+     <details id="add-password">
+      <summary>
+       Add a password
+      </summary>
+      <p>
+       Open Passwords in the mobile app and choose the add control. Enter the account name, credentials, and password, then save the record to your vault.
+      </p>
+     </details>
+     <details id="add-note">
+      <summary>
+       Add a secure note
+      </summary>
+      <p>
+       Open Notes, create a note, and enter your private information. Note editors autosave changes. Keep a current encrypted export for recovery.
+      </p>
+     </details>
+     <details id="use-generator">
+      <summary>
+       Use the password generator
+      </summary>
+      <p>
+       Generate a strong password locally and copy it into the account you are securing. The website generator offers 16, 32, or 64 characters and does not save generated passwords.
+      </p>
+      <p>
+       <a href="/features/#password-generator">
+        Open the password generator →
+       </a>
+      </p>
+     </details>
+     <details id="biometrics-help">
+      <summary>
+       Enable biometrics
+      </summary>
+      <p>
+       Unlock your vault with your Master Password, open the mobile security settings, and enable biometric quick unlock. Complete the device’s biometric prompt. Availability depends on the supported biometrics configured on your device.
+      </p>
+     </details>
+    </div>
+   </section>
+   <section class="section page-width guide-section" id="vault-management">
+    <div class="section-heading">
+     <p class="eyebrow">
+      02 · VAULT MANAGEMENT
+     </p>
+     <h2>
+      Stay in control of access.
+     </h2>
+    </div>
+    <div class="faq-list">
+     <details>
+      <summary>
+       Lock your vault
+      </summary>
+      <p>
+       Use the app’s Lock control when you finish. The database session closes and the app returns to its locked screen.
+      </p>
+     </details>
+     <details>
+      <summary>
+       Change your Master Password
+      </summary>
+      <p>
+       In the mobile security settings, choose the password change option and confirm the current and new Master Passwords. The app protects the existing vault key with your new password. Older exports still need their original password.
+      </p>
+     </details>
+     <details>
+      <summary>
+       Set automatic lock
+      </summary>
+      <p>
+       Choose an auto-lock duration in the mobile security settings. A privacy shield hides sensitive screens when the app becomes inactive. The selected interval determines when authentication is required after time in the background.
+      </p>
+     </details>
+     <details>
+      <summary>
+       Configure clipboard protection
+      </summary>
+      <p>
+       Choose a copied-password clearing duration in the mobile security settings, or use the background-clearing option. These mobile controls do not apply to passwords copied from the browser Recovery Viewer.
+      </p>
+     </details>
+    </div>
+   </section>
+   <section class="section page-width guide-section" id="backups">
+    <div class="section-heading">
+     <p class="eyebrow">
+      03 · BACKUPS
+     </p>
+     <h2>
+      Give yourself a way back.
+     </h2>
+     <p>
+      Save encrypted exports somewhere you can reach if your phone is unavailable.
+     </p>
+    </div>
+    <div class="cards three">
+     <article class="feature-card">
+      <span class="icon-tile">
+       <svg aria-hidden="true" class="line-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24">
+        <path d="M4 8h16v12H4zM3 4h18v4H3zM9 12h6">
+        </path>
+       </svg>
+      </span>
+      <h3>
+       .pnvault
+      </h3>
+      <p>
+       Complete encrypted vault: passwords and secure notes together.
+      </p>
+     </article>
+     <article class="feature-card">
+      <span class="icon-tile">
+       <svg aria-hidden="true" class="line-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24">
+        <circle cx="8" cy="8" r="5">
+        </circle>
+        <path d="m12 12 9 9m-3-3 3-3m-6 0 3-3">
+        </path>
+       </svg>
+      </span>
+      <h3>
+       .pnpass
+      </h3>
+      <p>
+       An encrypted package of supported password records.
+      </p>
+     </article>
+     <article class="feature-card">
+      <span class="icon-tile">
+       <svg aria-hidden="true" class="line-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24">
+        <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z">
+        </path>
+        <path d="M14 3v6h6M8 13h8M8 17h5">
+        </path>
+       </svg>
+      </span>
+      <h3>
+       .pnnote
+      </h3>
+      <p>
+       An encrypted package of supported secure notes.
+      </p>
+     </article>
+    </div>
+    <div class="faq-list">
+     <details id="create-backup">
+      <summary>
+       Create a .pnvault backup
+      </summary>
+      <ol>
+       <li>
+        Unlock Pass &amp; Note on your phone.
+       </li>
+       <li>
+        Open Vault and choose
+        <strong>
+         Export Vault
+        </strong>
+        .
+       </li>
+       <li>
+        Confirm your Master Password.
+       </li>
+       <li>
+        Choose a safe location in the device’s file picker and save the export.
+       </li>
+      </ol>
+      <p>
+       For a section package, use Export in Passwords or Notes. Each export receives its own encryption before it is saved outside the app.
+      </p>
+     </details>
+     <details>
+      <summary>
+       Store a backup safely
+      </summary>
+      <p>
+       Keep a current encrypted copy somewhere accessible independently of your phone. Retain the Master Password used for that export. If you use cloud storage, its file handling is governed by that provider.
+      </p>
+      <p>
+       File metadata such as the export type, date, and item count is readable; record contents are encrypted. A backup does not contain a recoverable copy of your password.
+      </p>
+     </details>
+     <details id="restore-backup">
+      <summary>
+       Restore from an encrypted backup
+      </summary>
+      <p>
+       Use the mobile app’s import or restore flow for the type of export you have. Select the compatible Pass &amp; Note file, enter the password used when it was exported, and review the app’s confirmation before proceeding.
+      </p>
+      <p>
+       A full vault restore and a section import can have different effects on existing records. Read the confirmation shown by your installed app before completing the operation.
+      </p>
+     </details>
+     <details>
+      <summary>
+       Use the Recovery Viewer
+      </summary>
+      <ol>
+       <li>
+        Open the
+        <a href="/recovery/">
+         Recovery Viewer
+        </a>
+        on a trusted browser.
+       </li>
+       <li>
+        Choose a .pnvault, .pnpass, or .pnnote export.
+       </li>
+       <li>
+        Enter the Master Password used to create that export.
+       </li>
+       <li>
+        Read the recovered passwords or notes.
+       </li>
+       <li>
+        Choose Close File when finished and clear any copied passwords from your clipboard.
+       </li>
+      </ol>
+     </details>
+    </div>
+    <a class="text-link" href="/security/#backups">
+     Understand backup encryption →
+    </a>
+   </section>
+   <section class="section page-width guide-section" id="troubleshooting">
+    <div class="section-heading">
+     <p class="eyebrow">
+      04 · TROUBLESHOOTING
+     </p>
+     <h2>
+      When something needs a second look.
+     </h2>
+    </div>
+    <div class="faq-list">
+     <details>
+      <summary>
+       I forgot my Master Password
+      </summary>
+      <p>
+       Pass &amp; Note cannot recover or reset a Master Password to decrypt your vault. An existing backup still requires the password used for that export. Biometric quick unlock does not reveal your Master Password. Avoid deleting or resetting the app while you assess your recovery options.
+      </p>
+     </details>
+     <details>
+      <summary>
+       Biometric unlock stopped working
+      </summary>
+      <p>
+       Use your Master Password to unlock. Enrollment changes, device security changes, or biometric lockout can make quick unlock unavailable. After unlocking, check your device’s biometric settings and enable quick unlock again in the app.
+      </p>
+     </details>
+     <details>
+      <summary>
+       My file will not import or open
+      </summary>
+      <p>
+       Check that it is a Pass &amp; Note encrypted export and that its extension matches its content. Use the password from the time of export, which may differ from your current password. Do not rename a ZIP or database file to a Pass &amp; Note extension. The browser viewer accepts files up to 25 MB.
+      </p>
+     </details>
+     <details>
+      <summary>
+       My export did not save
+      </summary>
+      <p>
+       Confirm the Master Password, check that your selected storage location has space and is available, and try exporting again. Verify that the saved file exists before relying on it as your backup.
+      </p>
+     </details>
+     <details>
+      <summary>
+       The browser viewer locked or cleared my file
+      </summary>
+      <p>
+       Privacy Lock activates when the tab goes into the background. Enter the backup password again to resume. If the inactivity timer cleared the session, select the encrypted file again. The original file on your device is unchanged.
+      </p>
+     </details>
+    </div>
+    <div class="support-panel">
+     <h3>
+      Still need help?
+     </h3>
+     <p>
+      Contact
+      <a href="mailto:support@passandnote.com">
+       support@passandnote.com
+      </a>
+      . Describe the issue and app version; keep passwords and vault contents private.
+     </p>
+    </div>
+   </section>
+  </main>
+  <footer class="site-footer">
+   <div class="page-width">
+    <div class="footer-grid">
+     <div class="footer-brand">
+      <a class="brand" href="/">
+       <img alt="" height="36" src="/assets/app-icon.png" width="36"/>
+       <span>
+        Pass &amp; Note
+       </span>
+      </a>
+      <p>
+       Your passwords. Your notes.
+       <br/>
+       Your vault.
+      </p>
+     </div>
+     <div>
+      <h2>
+       Product
+      </h2>
+      <a href="/features/">
+       Features
+      </a>
+      <a href="/how-it-works/">
+       How It Works
+      </a>
+      <a href="/recovery/">
+       Recovery
+      </a>
+     </div>
+     <div>
+      <h2>
+       Security
+      </h2>
+      <a href="/security/">
+       Security Architecture
+      </a>
+      <a href="/security/#specifications">
+       Technical Specifications
+      </a>
+      <a href="/security/#threat-model">
+       Threat Model
+      </a>
+     </div>
+     <div>
+      <h2>
+       Help
+      </h2>
+      <a href="/help/">
+       Guides
+      </a>
+      <a href="/help/#backups">
+       Backups
+      </a>
+      <a href="/help/#troubleshooting">
+       Troubleshooting
+      </a>
+      <a href="mailto:support@passandnote.com">
+       Contact
+      </a>
+     </div>
+     <div>
+      <h2>
+       Legal
+      </h2>
+      <a href="/privacy/">
+       Privacy
+      </a>
+      <a href="/terms/">
+       Terms
+      </a>
+     </div>
+    </div>
+    <div class="footer-about" id="about">
+     <strong>
+      About Pass &amp; Note
+     </strong>
+     <p>
+      Pass &amp; Note is an independently developed, local-first password and secure-notes application focused on privacy, portability, and user-controlled encrypted backups.
+     </p>
+    </div>
+    <div class="footer-bottom">
+     <span>
+      © 2026 Pass &amp; Note
+     </span>
+     <span>
+      Designed around your control.
+     </span>
+    </div>
+   </div>
+  </footer>
+ </body>
+</html>
