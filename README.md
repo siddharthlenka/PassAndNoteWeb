@@ -11,6 +11,8 @@ A static product website for the Pass & Note local-first mobile vault, with a wo
 | `/how-it-works/` | Visual guide from creating a vault through backup and recovery |
 | `/security/` | Encryption architecture, key management, platform protections, threat model, and technical specifications |
 | `/recovery/` | Working encrypted-file recovery viewer |
+| `/source/` | Public repositories, implementation overview, licence and audit distinction |
+| `/developer/` | Developer profile, engineering interests, and project links |
 | `/help/` | Getting Started, Vault Management, Backups, and Troubleshooting |
 | `/privacy/` | Privacy Policy |
 | `/terms/` | Terms & Conditions |
@@ -60,6 +62,8 @@ features/          Feature catalog and generator markup
 how-it-works/      Visual mobile workflow
 security/          Security architecture and specifications
 recovery/          Recovery landing page, file picker, and viewer markup
+source/            Public repository links and implementation overview
+developer/         Developer profile and project links
 help/              Setup, vault, backup, and troubleshooting guides
 privacy/           Privacy Policy
 terms/             Terms & Conditions
@@ -73,7 +77,7 @@ crypto.js          PASSNOTE container validation and decryption
 
 ## Maintaining content
 
-Store URLs live in the `download` section of `index.html`. The app icon is `assets/app-icon.png`. Navigation and footer markup are static in each page; update all eight pages together when changing shared links. `styles.css` and `site.js` are shared by all pages. Update asset query versions when deploying changes.
+Store URLs live in the `download` section of `index.html`. The app icon is `assets/app-icon.png`. Navigation and footer markup are static in each page; update all ten pages together when changing shared links. `styles.css` and `site.js` are shared by all pages. Update asset query versions when deploying changes.
 
 Security content was checked against the local mobile implementations in September 2026. iOS declares SQLCipher 4.10.0 and GRDB.swift 6.24.1; Android declares SQLCipher 4.17.0. SQLCipher defaults are identified and linked to upstream documentation. This describes inspected source, not a verification of published store binaries or an independent audit.
 
@@ -86,3 +90,47 @@ Deploy all HTML directories, `assets`, and the four JavaScript files (`site.js`,
 Before release, validate responsive navigation, download links, generator lengths and clipboard access, all three backup formats, incorrect passwords, corrupted files, Privacy Lock, session clearing, and mobile-app export compatibility. Keep the Privacy Policy, Terms, and store disclosures consistent with actual app behavior.
 
 The legal document wording on the Privacy Policy and Terms pages matches the pre-redesign versions, including the original legal-content commit `4ceb0c3`. Their shared navigation, layout, and theme can change without editing the legal documents.
+
+
+## Screenshots and live preview
+
+![Source code page preview](docs/screenshots/source-page.jpg)
+
+![Developer page preview](docs/screenshots/developer-page.jpg)
+
+Explore the [product homepage](https://passandnote.com/),
+[security architecture](https://passandnote.com/security/), and
+[recovery viewer](https://passandnote.com/recovery/). The homepage vault illustration
+is a product illustration rather than an app screenshot. Mobile screenshots are
+available from the linked [App Store](https://apps.apple.com/app/id6801015333) and
+[Google Play](https://play.google.com/store/apps/details?id=com.passandnote.vault) listings.
+
+## Limitations
+
+- Recovery is read-only; this website is not a hosted vault or sync service.
+- A compatible encrypted backup and its original export password are required.
+- Web Crypto requires HTTPS or a trusted localhost context; clipboard access also depends on browser permissions.
+- Recovery files are limited to 25 MB. Forgotten passwords cannot be reset.
+- A compromised browser, extension, device, or clipboard can expose readable data.
+- Source availability is not an independent audit or verification of store binaries.
+
+## Related repositories
+
+- [iOS vault — PassNoteVault](https://github.com/siddharthlenka/PassNoteVault)
+- [Android vault — PassAndNoteAndroid](https://github.com/siddharthlenka/PassAndNoteAndroid)
+- [Website and recovery viewer — PassAndNoteWeb](https://github.com/siddharthlenka/PassAndNoteWeb)
+
+Developer: [Siddharth Lenka](https://passandnote.com/developer/) ·
+[Source overview](https://passandnote.com/source/) ·
+[Security architecture](https://passandnote.com/security/)
+
+## Security reporting
+
+Report potential vulnerabilities privately to **support@passandnote.com**.
+See [SECURITY.md](SECURITY.md) for details. Do not post private vault data in issues.
+
+## Licence
+
+The original project code and assets are publicly available for inspection with
+**all rights reserved**; this is not an open-source licence granting reuse rights.
+See [LICENSE](LICENSE). Third-party dependencies retain their own licence terms.

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)"/>
+  <meta content="Inspect the public source for the Pass and Note iOS vault, Android vault, and local browser recovery viewer." name="description"/>
+  <meta content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" http-equiv="Content-Security-Policy"/>
+  <title>Source code | Pass &amp; Note</title>
+  <link href="https://passandnote.com/source/" rel="canonical"/>
+  <link href="/assets/app-icon.png" rel="icon" sizes="1024x1024" type="image/png"/>
+  <link href="/assets/app-icon.png" rel="apple-touch-icon"/>
+  <link href="/styles.css?v=20260909-6" rel="stylesheet"/>
+  <script defer="" src="/site.js?v=20260909-5">
+  </script>
+ </head>
+ <body>
+  <a class="skip-link" href="#main">
+   Skip to content
+  </a>
+  <header class="site-header">
+   <div class="header-inner page-width">
+    <a aria-label="Pass and Note home" class="brand" href="/">
+     <img alt="" height="36" src="/assets/app-icon.png" width="36"/>
+     <span>
+      Pass &amp; Note
+     </span>
+    </a>
+    <button aria-controls="main-navigation" aria-expanded="false" class="menu-toggle" type="button">
+     <svg aria-hidden="true" viewbox="0 0 24 24">
+      <path d="M4 6h16M4 12h16M4 18h16">
+      </path>
+     </svg>
+     <span>
+      Menu
+     </span>
+    </button>
+    <nav aria-label="Main navigation" id="main-navigation">
+     <a href="/features/">
+      Features
+     </a>
+     <a href="/how-it-works/">
+      How It Works
+     </a>
+     <a href="/security/">
+      Security
+     </a>
+     <a href="/recovery/">
+      Recovery
+     </a>
+     <a href="/help/">
+      Help
+     </a>
+     <a class="nav-download" href="/#download">
+      Download
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </nav>
+   </div>
+  </header>
+  <main id="main">
+   <header class="page-hero page-width">
+    <p class="eyebrow">SOURCE CODE</p>
+    <h1>A closer look at your vault.</h1>
+    <p class="lead">Explore how Pass &amp; Note stores data locally, protects vault keys, and opens encrypted backups in your browser.</p>
+   </header>
+   <section class="section page-width" aria-labelledby="repositories-title">
+    <div class="section-heading">
+     <h2 id="repositories-title">Three platforms. One connected project.</h2>
+     <p>Choose a repository to read the implementation, setup instructions, and platform limitations.</p>
+    </div>
+    <div class="cards three">
+     <article class="feature-card">
+      <p class="eyebrow">iOS</p>
+      <h3>PassNoteVault</h3>
+      <p>The mobile vault for passwords and secure notes, built with Swift and SwiftUI. GRDB and SQLCipher manage encrypted local storage; CryptoKit, Keychain, and device biometrics support vault protection.</p>
+      <a class="text-link" href="https://github.com/siddharthlenka/PassNoteVault">View iOS source ↗</a>
+     </article>
+     <article class="feature-card">
+      <p class="eyebrow">ANDROID</p>
+      <h3>PassAndNoteAndroid</h3>
+      <p>The Android vault built with Kotlin and Jetpack Compose. SQLCipher, Android Keystore, and strong biometric unlock support the local vault and encrypted backup workflow.</p>
+      <a class="text-link" href="https://github.com/siddharthlenka/PassAndNoteAndroid">View Android source ↗</a>
+     </article>
+     <article class="feature-card">
+      <p class="eyebrow">WEB</p>
+      <h3>PassAndNoteWeb</h3>
+      <p>This product website and its read-only recovery viewer, built with HTML, CSS, JavaScript, and Web Crypto. Compatible backup files are decrypted locally in the browser tab.</p>
+      <a class="text-link" href="https://github.com/siddharthlenka/PassAndNoteWeb">View website &amp; recovery source ↗</a>
+     </article>
+    </div>
+   </section>
+   <section class="section section-tint">
+    <div class="page-width split-section">
+     <div>
+      <div class="section-heading">
+       <p class="eyebrow">WHAT TO EXPLORE</p>
+       <h2>Follow the data from vault to backup.</h2>
+       <p>The mobile apps keep the primary vault on your device. Manual encrypted exports provide a separate recovery path.</p>
+      </div>
+      <ul class="check-list">
+       <li>Vault-key generation, password derivation, and key storage</li>
+       <li>SQLCipher database access and record handling</li>
+       <li>Encrypted .pnvault, .pnpass, and .pnnote exports</li>
+       <li>Browser-side backup validation and decryption</li>
+      </ul>
+      <a class="text-link" href="/security/">Read the security architecture →</a>
+     </div>
+     <div class="architecture-card">
+      <h3>Source availability and security</h3>
+      <p>Public code helps people inspect design decisions and report problems. It does not establish that the app has passed an independent security audit, and it does not verify the contents of published app binaries.</p>
+      <p>The repositories are public for inspection with all rights reserved. Review each repository’s licence notice and third-party dependency terms before reusing code.</p>
+      <p>Found a potential vulnerability? Report it privately to <a href="mailto:support@passandnote.com?subject=Security%20report">support@passandnote.com</a>. Do not include real passwords, vault files, or private notes.</p>
+     </div>
+    </div>
+   </section>
+   <section class="section page-width">
+    <h2>The person behind Pass &amp; Note.</h2>
+    <p>Learn about the developer and the thinking behind the project.</p>
+    <a class="text-link" href="/developer/">Meet Siddharth Lenka →</a>
+   </section>
+  </main>
+  <footer class="site-footer">
+   <div class="page-width">
+    <div class="footer-grid">
+     <div class="footer-brand">
+      <a class="brand" href="/">
+       <img alt="" height="36" src="/assets/app-icon.png" width="36"/>
+       <span>
+        Pass &amp; Note
+       </span>
+      </a>
+      <p>
+       Your passwords. Your notes.
+       <br/>
+       Your vault.
+      </p>
+     </div>
+     <div>
+      <h2>
+       Product
+      </h2>
+      <a href="/features/">
+       Features
+      </a>
+      <a href="/how-it-works/">
+       How It Works
+      </a>
+      <a href="/source/">Source Code</a>
+      <a href="/developer/">Developer</a>
+      <a href="/recovery/">
+       Recovery
+      </a>
+     </div>
+     <div>
+      <h2>
+       Security
+      </h2>
+      <a href="/security/">
+       Security Architecture
+      </a>
+      <a href="/security/#specifications">
+       Technical Specifications
+      </a>
+      <a href="/security/#threat-model">
+       Threat Model
+      </a>
+     </div>
+     <div>
+      <h2>
+       Help
+      </h2>
+      <a href="/help/">
+       Guides
+      </a>
+      <a href="/help/#backups">
+       Backups
+      </a>
+      <a href="/help/#troubleshooting">
+       Troubleshooting
+      </a>
+      <a href="mailto:support@passandnote.com">
+       Contact
+      </a>
+     </div>
+     <div>
+      <h2>
+       Legal
+      </h2>
+      <a href="/privacy/">
+       Privacy
+      </a>
+      <a href="/terms/">
+       Terms
+      </a>
+     </div>
+    </div>
+    <div class="footer-about" id="about">
+     <strong>
+      About Pass &amp; Note
+     </strong>
+     <p>
+      Pass &amp; Note is an independently developed, local-first password and secure-notes application focused on privacy, portability, and user-controlled encrypted backups. <a class="text-link" href="/developer/">Meet the developer →</a>
+     </p>
+    </div>
+    <div class="footer-bottom">
+     <span>
+      © 2026 Pass &amp; Note
+     </span>
+     <span>
+      Designed around your control.
+     </span>
+    </div>
+   </div>
+  </footer>
+ </body>
+</html>
+
